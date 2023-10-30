@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/merriweathersans_bold"
-        android:text="DESIGN BY\nANDROID"
+        android:text="DESIGN BY\n Yug Patel"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="25sp"

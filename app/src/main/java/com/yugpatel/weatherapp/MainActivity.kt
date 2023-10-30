@@ -1,23 +1,27 @@
 package com.yugpatel.weatherapp
 
 
+
+import com.yugpatel.weatherapp.databinding.ActivityMainBinding
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.SearchView
-import com.airbnb.lottie.L.TAG
-import com.google.android.material.search.SearchBar
-import com.yugpatel.weatherapp.databinding.ActivityMainBinding
+import android.widget.TextView
+import androidx.core.view.WindowCompat
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
 
 
 
@@ -88,7 +92,9 @@ class MainActivity : AppCompatActivity() {
                     binding.day.text = dayName(System.currentTimeMillis())
                     binding.date.text = date()
                     binding.CityName.text = "$Cityname"
+                    changeImagesAccordingToWeatherCondition(condition)
                     // Log.d("TAG", "onResponse: $temperature")
+
                 }
             }
 
@@ -98,8 +104,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun changeImagesAccordingToWeatherCondition(conditions: String)
-    {
+    private fun changeImagesAccordingToWeatherCondition(conditions: String) {
         when(conditions){
             "Clear Sky","Sunny","Clear" -> {
                 binding.root.setBackgroundResource(R.drawable.sunny_background)
@@ -120,7 +125,7 @@ class MainActivity : AppCompatActivity() {
                 binding.lottieAnimationView3.setAnimation(R.raw.snow)
             }
             else ->{
-                binding.root.setBackgroundResource(R.drawable.colud_background)
+                binding.root.setBackgroundResource(R.drawable.sunny_background)
                 binding.lottieAnimationView3.setAnimation(R.raw.sun)
             }
         }
@@ -142,9 +147,5 @@ class MainActivity : AppCompatActivity() {
         val sdf = SimpleDateFormat("EEEE", Locale.getDefault())
         return sdf.format((Date()))
     }
-
-}
-
-private fun SearchBar.setOnQueryTextListener(onQueryTextListener: SearchView.OnQueryTextListener) {
 
 }

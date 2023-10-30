@@ -7,23 +7,22 @@
     android:background="@drawable/sunny_background"
     tools:context=".MainActivity">
 
-    <com.google.android.material.search.SearchBar
+    <SearchView
         android:id="@+id/searchView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/searchviewshape"
-        android:iconifiedByDefault="false"
-        android:queryHint="Search For A City"
+        android:iconifiedByDefault = "false"
+        android:queryHint="Locate City Forecast"
         android:searchIcon="@drawable/search"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </com.google.android.material.search.SearchBar>
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView3"

@@ -31,24 +31,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         fetchWeatherData("Surat")
-        SearchCity()
+        searchCity()
     }
 
-    private fun SearchCity(){
-        val searchView = binding.searchView
-        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener {
+    private fun searchCity() {
+        val searchView = findViewById<SearchView>(R.id.searchView)
+        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
+                if (query != null){
                     fetchWeatherData(query)
                 }
+
                 return true
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
+            override fun onQueryTextChange(p0: String?): Boolean {
                 return true
             }
+
         })
-
     }
 
     private fun fetchWeatherData(Cityname: String) {
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             .build().create(ApiInterface::class.java)
 
         val response =
-            retrofit.getWeatherData("Surat", "e5481fc3b9d527a3a671a0ef9382f386", "metric")
+            retrofit.getWeatherData( Cityname, "e5481fc3b9d527a3a671a0ef9382f386", "metric")
         response.enqueue(/* callback = */ object : Callback<WeatherApp> {
             override fun onResponse(call: Call<WeatherApp>, response: Response<WeatherApp>) {
                 val responseBody = response.body()
@@ -67,8 +68,8 @@ class MainActivity : AppCompatActivity() {
                     val temperature = responseBody.main.temp.toString()
                     val humidity = responseBody.main.humidity
                     val windSpeed = responseBody.wind.speed
-                    val sunRise = responseBody.sys.sunrise
-                    val sunSet = responseBody.sys.sunset
+                    val sunRise = responseBody.sys.sunrise.toLong()
+                    val sunSet = responseBody.sys.sunset.toLong()
                     val seaLevel = responseBody.main.pressure
                     val condition = responseBody.weather.firstOrNull()?.main ?: "unknown"
                     val maxTemp = responseBody.main.temp_max
@@ -80,8 +81,8 @@ class MainActivity : AppCompatActivity() {
                     binding.minTemp.text = "Min Temp: $minTemp °C"
                     binding.humidity.text = "$humidity %"
                     binding.windSpeed.text = "windSpeed m/s"
-                    binding.sunRise.text = "$sunRise"
-                    binding.sunset.text = "$sunSet"
+                    binding.sunRise.text = "${time(sunRise)}"
+                    binding.sunset.text = "${time(sunSet)}"
                     binding.Sea.text = "$seaLevel hPa"
                     binding.condition.text = condition
                     binding.day.text = dayName(System.currentTimeMillis())
@@ -97,9 +98,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun changeImagesAccordingToWeatherCondition(comditions: String)
+    private fun changeImagesAccordingToWeatherCondition(conditions: String)
     {
-        when(comditions){
+        when(conditions){
             "Clear Sky","Sunny","Clear" -> {
                 binding.root.setBackgroundResource(R.drawable.sunny_background)
                 binding.lottieAnimationView3.setAnimation(R.raw.sun)
@@ -111,12 +112,16 @@ class MainActivity : AppCompatActivity() {
 
             "Light Rain","Drizzle","Moderate Rain","Showers","Heavy Rain" ->{
                 binding.root.setBackgroundResource(R.drawable.rain_background)
-                binding.lottieAnimationView3.setAnimation(R.raw.cloud)
+                binding.lottieAnimationView3.setAnimation(R.raw.rain)
             }
 
             "Light Rain","Moderate Snow","Heavy Snow","Blizzard" ->{
                 binding.root.setBackgroundResource(R.drawable.colud_background)
-                binding.lottieAnimationView3.setAnimation(R.raw.cloud)
+                binding.lottieAnimationView3.setAnimation(R.raw.snow)
+            }
+            else ->{
+                binding.root.setBackgroundResource(R.drawable.colud_background)
+                binding.lottieAnimationView3.setAnimation(R.raw.sun)
             }
         }
         binding.lottieAnimationView3.playAnimation()
@@ -126,6 +131,11 @@ class MainActivity : AppCompatActivity() {
     private fun date(): String {
         val sdf = SimpleDateFormat("dd:MMMM:yyyy", Locale.getDefault())
         return sdf.format((Date()))
+
+    }
+    private fun time(timeStamp: Long): String {
+        val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
+        return sdf.format((Date(timeStamp*1000)))
 
     }
     fun dayName(timeStamp: Long): String {

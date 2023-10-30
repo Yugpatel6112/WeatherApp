@@ -3,8 +3,8 @@ Description: Kotlin Weather App is a user-friendly Android application that prov
 
 Api Keys: e5481fc3b9d527a3a671a0ef9382f386
 
-Key Features: Real-time weather data from the OpenWeatherMap API. Search for weather information for any city worldwide. View current weather conditions, including temperature, humidity, and wind speed. Interactive and responsive user interface for a seamless user experience.
+Key Features: Real-time weather data from the OpenWeatherMap API. Search for weather information for any city worldwide. View current weather conditions, including temperature, humidity, and wind speed. Interactive and responsive user interface for a seamless user experience
 
-![WhatsApp Image 2023-10-31 at 01 04 50](https://github.com/Yugpatel6112/WeatherApp/assets/98756692/7b051e96-0c46-4cc3-8823-9d461e730233)
+![Image 2](https://github.com/Yugpatel6112/WeatherApp/assets/98756692/81fbe7c2-f5dc-461c-bf76-a87d0f401438)
 
-![WhatsApp Image 2023-10-31 at 01 04 49](https://github.com/Yugpatel6112/WeatherApp/assets/98756692/2501a3fe-82c4-4b4d-9749-5cda7d0002aa)
+![Image 1](https://github.com/Yugpatel6112/WeatherApp/assets/98756692/4851883c-2eca-42c8-b37b-d5e2e2793fb4)
